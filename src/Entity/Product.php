@@ -10,6 +10,11 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
+/**
+ * @ORM\Entity(repositoryClass=SupplierRepository::class)
+ * @Vich\Uploadable
+ */
+
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
 {
@@ -83,6 +88,19 @@ class Product
 
         return $this;
     }
+    /**
+ 
+     * @var string
+     */
+    #[ORM\Column(type: 'string', length: 255)]
+    private $image;
+
+    /**
+     * @Vich\UploadableField(mapping="product_images", fileNameProperty="image")
+     * @var File
+     */
+    #[Vich\UploadableField(mapping: 'product_images', fileNameProperty: 'image')]
+    private $imageFile;
     public function setImageFile(File $image = null)
     {
         $this->imageFile = $image;

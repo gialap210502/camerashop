@@ -5,6 +5,9 @@ namespace App\Form;
 use App\Entity\Product;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use UploaderBundle\Form\Type\VichUploaderBundle;
+use Vich\UploaderBundle\Form\Type\VichImageType;
+
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ProductType extends AbstractType
