@@ -51,23 +51,42 @@ class Order
 
     public function addItem(OrderItem $item): self
     {
-        if (!$this->items->contains($item)) {
-            $this->items[] = $item;
-            $item->setOrderRef($this);
+        foreach ($this->getItems() as $existingItem) {
+            if ($existingItem->equals($item)) {
+                $existingItem->setQuantity(
+                    $existingItem->getQuantity() + $item->getQuantity()
+                );
+                return $this;
+            }
         }
+
+        $this->items[] = $item;
+        $item->setOrderRef($this);
 
         return $this;
     }
 
     public function removeItem(OrderItem $item): self
     {
-        if ($this->items->removeElement($item)) {
-            // set the owning side to null (unless already changed)
-            if ($item->getOrderRef() === $this) {
-                $item->setOrderRef(null);
-            }
+        foreach ($this->getItems() as $item){
+            $this->removeItem($item);
         }
 
         return $this;
+    }
+
+    /**
+     * Calculates the order total.
+     * @return float
+     */
+    public function getTotal(): float
+    {
+        $total = 0;
+
+        foreach ($this->getItems() as $item) {
+            $total += $item->getToal();
+        }
+        
+        return $total;
     }
 }
