@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Form\CartType;
+use App\Manager\CartManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class CartController
@@ -16,16 +18,16 @@ class CartController extends AbstractController
     /**
      * @Route('/cart', name: 'cart')
      */
-    public function index(CartManager $cartManager, Request $request)
+    public function index(CartManager $CartManager, Request $request)
     {
-        $cart = $cartManger->getCurrentCart();
+        $cart = $CartManager->getCurrentCart();
 
         $form = $this->createForm(CartType::class, $cart);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $cart->setUpdatedAt(new \DateTime());
-            $cartManager->save($cart);
+            $CartManager->save($cart);
 
             return $this->redirectToRoute('cart');
         }
