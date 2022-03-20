@@ -75,29 +75,25 @@ class ProductController extends AbstractController
 
         return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
     }
-    
-    /**
-     * @Route('/{id}/detail', name: 'product.detail')
-     */
+    #[Route('/{id}/detail', name: 'product.detail')]
     public function detail(Product $product, Request $request, CartManager $cartManager): Response
     {
         $form = $this->createForm(AddToCartType::class);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+        if($form->isSubmitted() && $form->isValid()){
             $item = $form->getData();
             $item->setProduct($product);
 
-            $cart = $cartManger->getCurrentCart();
+            $cart = $cartManager->getCurrentCart();
             $cart
                 ->addItem($item)
-                ->setUpdateAt(new \DateTime());
+                ->setUpdatedAt(new \DateTime());
             
             $cartManager->save($cart);
-
-            return $this->redicrectToRoute('product.detail', ['id' => $product->getId()]);
+            return $this->redirectToRoute('product.detail', ['id' => $product->getId()]);
         }
         return $this->render('product/detail.html.twig', [
-            'product' => $product,
+            'product' =>$product,
             'form' => $form->createView()
         ]);
     }
