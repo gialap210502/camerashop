@@ -37,6 +37,8 @@ class Order
      */
     const STATUS_CART = 'cart';
 
+    
+
     public function __construct()
     {
         $this->items = new ArrayCollection();
@@ -90,7 +92,7 @@ class Order
         $total = 0;
 
         foreach ($this->getItems() as $item) {
-            $total += $item->getToal();
+            $total += $item->getTotal();
         }
         
         return $total;
@@ -116,6 +118,17 @@ class Order
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }
