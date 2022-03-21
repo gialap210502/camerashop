@@ -90,7 +90,7 @@ class Order
         $total = 0;
 
         foreach ($this->getItems() as $item) {
-            $total += $item->getToal();
+            $total += $item->getTotal();
         }
         
         return $total;
