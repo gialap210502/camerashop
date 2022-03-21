@@ -119,7 +119,6 @@ class Order
 
         return $this;
     }
-<<<<<<< HEAD
 
     public function getStatus(): ?string
     {
@@ -132,7 +131,4 @@ class Order
 
         return $this;
     }
-
-=======
->>>>>>> aa888accaf0d8c0cd8fbbc075c5e38d4be766061
 }
