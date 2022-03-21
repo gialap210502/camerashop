@@ -87,3 +87,10 @@
     font-size:13px;
     margin-bottom:0;
   }
+  
+  .bgheader{
+    background-image: url("uploads/images/banner.jpg");
+    width: 100%;
+    height: 430px;
+    color: rgb(19, 11, 11);
+}
