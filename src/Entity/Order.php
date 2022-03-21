@@ -90,7 +90,7 @@ class Order
         $total = 0;
 
         foreach ($this->getItems() as $item) {
-            $total += $item->getTotal();
+            $total += $item->getToal();
         }
         
         return $total;
@@ -119,6 +119,7 @@ class Order
 
         return $this;
     }
+<<<<<<< HEAD
 
     public function getStatus(): ?string
     {
@@ -132,4 +133,6 @@ class Order
         return $this;
     }
 
+=======
+>>>>>>> aa888accaf0d8c0cd8fbbc075c5e38d4be766061
 }
