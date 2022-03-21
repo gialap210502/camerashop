@@ -74,12 +74,44 @@ class Order
 
     public function removeItem(OrderItem $item): self
     {
-        foreach ($this->getItems() as $item){
+        if ($this->items->removeElement($item)) {
+            // set the owning side to null (unless already changed)
+            if ($item->getOrderRef() === $this) {
+                $item->setOrderRef(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Removes all items from the order.
+     *
+     * @return $this
+     */
+    public function removeItems(): self
+    {
+        foreach ($this->getItems() as $item) {
             $this->removeItem($item);
         }
 
         return $this;
     }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+
+
 
     /**
      * Calculates the order total.
@@ -120,15 +152,4 @@ class Order
         return $this;
     }
 
-    public function getStatus(): ?string
-    {
-        return $this->status;
-    }
-
-    public function setStatus(string $status): self
-    {
-        $this->status = $status;
-
-        return $this;
-    }
 }
