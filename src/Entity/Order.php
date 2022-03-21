@@ -37,8 +37,6 @@ class Order
      */
     const STATUS_CART = 'cart';
 
-    
-
     public function __construct()
     {
         $this->items = new ArrayCollection();
@@ -121,6 +119,7 @@ class Order
 
         return $this;
     }
+
     public function getStatus(): ?string
     {
         return $this->status;
@@ -132,4 +131,5 @@ class Order
 
         return $this;
     }
+
 }
