@@ -18,6 +18,8 @@ class CartController extends AbstractController
     /**
      * @Route('/cart', name: 'cart')
      */
+    #[Route('/cart', name: 'cart')]
+
     public function index(CartManager $CartManager, Request $request)
     {
         $cart = $CartManager->getCurrentCart();
